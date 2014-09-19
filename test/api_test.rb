@@ -17,9 +17,9 @@ module WebStore
       assert_equal 200, response.status
 
       assert_json_response [
-        {"id"=>1, "name"=>"Red Pen", "sku"=>"redp100", "price"=>100},
-        {"id"=>2, "name"=>"Blue Pen", "sku"=>"blup100", "price"=>100},
-        {"id"=>3, "name"=>"Black Pen", "sku"=>"blap100", "price"=>100}
+        {"id" => 1, "name" => "Red Pen", "sku" => "redp100", "price" => 100},
+        {"id" => 2, "name" => "Blue Pen", "sku" => "blup100", "price" => 100},
+        {"id" => 3, "name" => "Black Pen", "sku" => "blap100", "price" => 100}
       ]
     end
 
@@ -38,6 +38,11 @@ module WebStore
       get "/v1/products/1000000"
 
       assert_equal 404, response.status
+      assert_equal "application/json", response.headers['Content-Type']
+      assert_json_response(
+        "status_code" => 404,
+        "message" => "Couldn't find WebStore::Product with 'id'=1000000"
+      )
     end
 
     it "requires authentication to create a new product" do
@@ -52,7 +57,17 @@ module WebStore
 
       assert_equal 201, response.status
       assert_json_response(
-        {"id"=>1, "name"=>"Green Pen", "sku"=>"grep100", "price"=>100},
+        {"id" => 1, "name" => "Green Pen", "sku" => "grep100", "price" => 100},
+      )
+    end
+
+    it "returns 404 with a json content type for a nonexistant route" do
+      get "/v1/foo/bar"
+
+      assert_equal 404, response.status
+      assert_equal "application/json", response.headers['Content-Type']
+      assert_json_response(
+        "status_code" => 404, "message" => "Path not found."
       )
     end
   end
