@@ -1,5 +1,9 @@
-require 'dotenv'
-Dotenv.load
+begin
+  require 'dotenv'
+  Dotenv.load
+rescue LoadError
+  # Don't load dotenv in production
+end
 
 $:.unshift File.expand_path('lib', File.dirname(__FILE__))
 env = (ENV['RACK_ENV'] || :development)
