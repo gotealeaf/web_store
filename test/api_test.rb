@@ -61,7 +61,7 @@ module WebStore
       )
     end
 
-    it "returns 404 with json for a nonexistant route" do
+    it "returns 404 with json for a nonexistent route" do
       get "/v1/foo/bar"
 
       assert_equal 404, response.status
