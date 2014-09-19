@@ -1,6 +1,8 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
+ruby '2.1.2'
+
 gem 'dotenv', :groups => [:development, :test]
 
 gem 'rack', '~> 1.5.2'
