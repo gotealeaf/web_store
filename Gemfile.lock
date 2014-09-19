@@ -54,6 +54,7 @@ GEM
     i18n (0.6.11)
     ice_nine (0.11.0)
     json (1.8.1)
+    kgio (2.9.2)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -80,6 +81,7 @@ GEM
     racksh (1.0.0)
       rack (>= 1.0)
       rack-test (>= 0.5)
+    raindrops (0.13.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -100,6 +102,10 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.8)
+    unicorn (4.8.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     virtus (1.0.3)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -124,3 +130,4 @@ DEPENDENCIES
   rake
   rerun
   roar
+  unicorn
