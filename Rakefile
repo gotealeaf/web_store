@@ -1,3 +1,5 @@
+require 'rake/testtask'
+
 task :env do
   require_relative 'env'
 end
@@ -10,3 +12,10 @@ task :setup_db => :env do
   WebStore::Product.truncate_and_reset_table!
   WebStore::Product.seed!
 end
+
+Rake::TestTask.new do |t|
+  t.pattern = "test/*_test.rb"
+  t.libs << 'test'
+end
+
+task :default => :test
