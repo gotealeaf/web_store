@@ -51,13 +51,15 @@ module WebStore
       end
 
       post '/reset' do
-        status 204
+        status 200
 
         Product.connection.execute 'TRUNCATE TABLE products RESTART IDENTITY;'
 
         Product.create! name: "Red Pen", sku: "redp100", price: 100
         Product.create! name: "Blue Pen", sku: "blup100", price: 100
         Product.create! name: "Black Pen", sku: "blap100", price: 100
+
+        { status_code: 200, message: "The web store has been reset!" }
       end
     end
 

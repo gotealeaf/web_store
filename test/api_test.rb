@@ -76,7 +76,12 @@ module WebStore
 
       post '/v1/reset', {}, 'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
 
-      assert_equal 204, response.status
+      assert_equal 200, response.status
+      assert_json_response(
+        "status_code" => 200,
+        "message" => "The web store has been reset!"
+      )
+
       assert_equal 3, Product.count
 
       assert_equal 0, Product.where(sku: "magp100").count
