@@ -5,7 +5,6 @@ require 'minitest/autorun'
 require 'byebug'
 
 require_relative '../env'
-require_relative '../api'
 
 include Rack::Test::Methods
 

@@ -1,5 +1,3 @@
-require_relative './env'
-
 module WebStore
   class API < Grape::API
     version 'v1', using: :path
