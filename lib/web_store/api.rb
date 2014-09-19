@@ -45,8 +45,19 @@ module WebStore
         requires :sku
         optional :price
       end
+
       post '/products' do
         Product.create! declared_params
+      end
+
+      post '/reset' do
+        status 204
+
+        Product.connection.execute 'TRUNCATE TABLE products RESTART IDENTITY;'
+
+        Product.create! name: "Red Pen", sku: "redp100", price: 100
+        Product.create! name: "Blue Pen", sku: "blup100", price: 100
+        Product.create! name: "Black Pen", sku: "blap100", price: 100
       end
     end
 

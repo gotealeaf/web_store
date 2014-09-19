@@ -61,7 +61,7 @@ module WebStore
       )
     end
 
-    it "returns 404 with a json content type for a nonexistant route" do
+    it "returns 404 with json for a nonexistant route" do
       get "/v1/foo/bar"
 
       assert_equal 404, response.status
@@ -69,6 +69,28 @@ module WebStore
       assert_json_response(
         "status_code" => 404, "message" => "Path not found."
       )
+    end
+
+    it "deletes all products and seeds with default data" do
+      Product.create! name: "Magic Pen", sku: "magp100", price: 50000
+
+      post '/v1/reset', {}, 'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
+
+      assert_equal 204, response.status
+      assert_equal 3, Product.count
+
+      assert_equal 0, Product.where(sku: "magp100").count
+    end
+
+    it "requires authentication to reset products" do
+      Product.create! name: "Magic Pen", sku: "magp100", price: 50000
+
+      post '/v1/reset'
+
+      assert_equal 401, response.status
+      assert_equal 1, Product.count
+
+      assert_equal 1, Product.where(sku: "magp100").count
     end
   end
 end
