@@ -31,6 +31,10 @@ def post_json path, data, headers={}
   post path, data.to_json, headers.merge("CONTENT_TYPE" => "application/json")
 end
 
+def put_json path, data, headers={}
+  put path, data.to_json, headers.merge("CONTENT_TYPE" => "application/json")
+end
+
 DatabaseCleaner.clean_with(:truncation)
 DatabaseCleaner.strategy = :truncation
 

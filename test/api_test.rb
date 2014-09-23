@@ -93,6 +93,36 @@ module WebStore
       )
     end
 
+    it "updates an existing product" do
+      product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
+
+      put_json "/v1/products/#{product.id}",
+        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+
+      assert_equal 200, response.status
+      assert_json_response(
+        {"id" => 1, "name" => "Green Pen", "sku" => "grep100", "price" => 100},
+      )
+
+      get "/v1/products/#{product.id}"
+      assert_json_response(
+        {"id" => 1, "name" => "Green Pen", "sku" => "grep100", "price" => 100},
+      )
+    end
+
+    it "validates params when updating a product" do
+      Product.create! name: 'Greenish Pen', sku: 'grep100', price: 100
+      product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
+
+      put_json "/v1/products/#{product.id}",
+        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+
+      assert_equal 422, response.status
+      assert_json_response(
+        {"status_code" => 422, "message" => "Sku has already been taken"}
+      )
+    end
+
     it "returns 404 with json for a nonexistent route" do
       get "/v1/foo/bar"
 

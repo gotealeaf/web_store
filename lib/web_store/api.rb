@@ -65,6 +65,24 @@ module WebStore
         end
       end
 
+      desc "Update the attributes of an existing product."
+      params do
+        requires :id, type: Integer, desc: 'Product ID'
+        requires :name, type: String, desc: 'Name of the product'
+        requires :sku, type: String, regexp: /[\w]{3,}/,
+          desc: '3+ character unique identifier for product'
+        optional :price, type: Integer, desc: 'Price of the product in cents'
+      end
+      put '/products/:id' do
+        product = Product.find(params[:id])
+        if product.update(declared_params)
+          product
+        else
+          status 422
+          {status_code: 422, message: product.errors.full_messages.to_sentence}
+        end
+      end
+
       desc "Reset the store to its default state."
       post '/reset' do
         status 200
