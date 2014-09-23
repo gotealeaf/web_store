@@ -47,7 +47,13 @@ module WebStore
         optional :price, type: Integer, desc: 'Price of the product in cents'
       end
       post '/products' do
-        Product.create! declared_params
+        product = Product.new declared_params
+        if product.save
+          product
+        else
+          status 422
+          {status_code: 422, message: product.errors.full_messages.to_sentence}
+        end
       end
 
       desc "Reset the store to its default state."

@@ -1,6 +1,7 @@
 module WebStore
   class Product < ActiveRecord::Base
     validates :name, :sku, presence: true
+    validates :sku, format: /\w{3,}/, uniqueness: true
 
     def self.seed!
       create! name: "Red Pen", sku: "redp100", price: 100
