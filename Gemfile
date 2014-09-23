@@ -5,13 +5,13 @@ ruby '2.1.2'
 
 gem 'dotenv', :groups => [:development, :test]
 
-gem 'rack', '~> 1.5.2'
-gem 'grape', '~> 0.5.0'
+gem 'rack'
+gem 'grape'
 gem 'activerecord', require: 'active_record'
 gem 'pg'
 gem 'rake'
-gem 'roar'
 gem 'racksh'
+gem 'grape-swagger'
 
 group :development do
   gem 'byebug'

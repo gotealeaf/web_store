@@ -27,7 +27,7 @@ module WebStore
 
     desc "Fetch a single product."
     params do
-      requires :id
+      requires :id, type: Integer, desc: 'Product ID'
     end
     get '/products/:id' do
       Product.find params[:id]
@@ -41,15 +41,16 @@ module WebStore
 
       desc "Create a new product."
       params do
-        requires :name
-        requires :sku
-        optional :price
+        requires :name, type: String, desc: 'Name of the product'
+        requires :sku, type: String, regexp: /[\w]{3,}/,
+          desc: '3+ character unique identifier for product'
+        optional :price, type: Integer, desc: 'Price of the product in cents'
       end
-
       post '/products' do
         Product.create! declared_params
       end
 
+      desc "Reset the store to its default state."
       post '/reset' do
         status 200
 
@@ -59,6 +60,14 @@ module WebStore
         { status_code: 200, message: "The web store has been reset!" }
       end
     end
+
+    add_swagger_documentation api_version: "v1",
+      hide_documentation_path: true,
+      hide_format: true,
+      info: {
+        title: "Web Store API",
+        description: "An example API server from Tealeaf."
+      }
 
     route :any, '*path' do
       status 404
