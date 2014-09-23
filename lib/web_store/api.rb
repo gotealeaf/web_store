@@ -83,6 +83,17 @@ module WebStore
         end
       end
 
+      desc "Remove a product from the system."
+      params do
+        requires :id, type: Integer, desc: 'Product ID'
+      end
+      delete '/products/:id' do
+        product = Product.find(params[:id])
+        product.destroy!
+        status 204
+        nil
+      end
+
       desc "Reset the store to its default state."
       post '/reset' do
         status 200

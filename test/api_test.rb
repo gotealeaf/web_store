@@ -123,6 +123,38 @@ module WebStore
       )
     end
 
+    it "requires authentication to update a product" do
+      product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
+
+      put_json "/v1/products/#{product.id}",
+        {name: 'Green Pen', sku: 'grep100', price: 100}
+
+      assert_equal 401, response.status
+      assert_equal 1, Product.count
+
+      assert_equal 1, Product.where(sku: "magp100").count
+    end
+
+    it "deletes a existing product" do
+      product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
+
+      delete "/v1/products/#{product.id}", {}, auth('admin', 'password')
+
+      assert_equal 204, response.status
+      assert_equal "", response.body
+    end
+
+    it "requires authentication to delete a product" do
+      product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
+
+      delete "/v1/products/#{product.id}"
+
+      assert_equal 401, response.status
+      assert_equal 1, Product.count
+
+      assert_equal 1, Product.where(sku: "magp100").count
+    end
+
     it "returns 404 with json for a nonexistent route" do
       get "/v1/foo/bar"
 
