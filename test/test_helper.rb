@@ -48,4 +48,8 @@ def encode_basic_auth(username, password)
   "Basic " + Base64.encode64("#{username}:#{password}")
 end
 
+def auth(username, password)
+  {'HTTP_AUTHORIZATION' => encode_basic_auth(username, password)}
+end
+
 I18n.enforce_available_locales = false
