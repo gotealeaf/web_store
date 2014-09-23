@@ -20,6 +20,15 @@ module WebStore
         )
     end
 
+    before do
+      begin
+        body = request.body.read
+        JSON.parse body unless body.blank?
+      rescue JSON::ParserError => e
+        error!({status_code: 415, message: "POST, PUT, and PATCH requests must have application/json media type"}, 415)
+      end
+    end
+
     desc "Fetch all products."
     get '/products' do
       Product.all

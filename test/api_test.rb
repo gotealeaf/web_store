@@ -46,13 +46,23 @@ module WebStore
     end
 
     it "requires authentication to create a new product" do
-      post '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100}
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 401, response.status
     end
 
-    it "creates a new product" do
+    it "requires json media type to create a new product" do
       post '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100},
+        'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
+
+      assert_equal 415, response.status
+      assert_json_response(
+        "status_code" => 415, "message" => "POST, PUT, and PATCH requests must have application/json media type"
+      )
+    end
+
+    it "creates a new product" do
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100},
         'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
 
       assert_equal 201, response.status
@@ -62,7 +72,7 @@ module WebStore
     end
 
     it "requires a name to create a product" do
-      post '/v1/products', {name: '', sku: 'grep100', price: 100},
+      post_json '/v1/products', {name: '', sku: 'grep100', price: 100},
         'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
 
       assert_equal 422, response.status
@@ -74,7 +84,7 @@ module WebStore
     it "requires a unique sku to create a product" do
       Product.create! name: 'Greenish Pen', sku: 'grep100', price: 100
 
-      post '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100},
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100},
         'HTTP_AUTHORIZATION' => encode_basic_auth('admin', 'password')
 
       assert_equal 422, response.status
