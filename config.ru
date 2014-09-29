@@ -5,4 +5,6 @@ use Rack::Static,
   :root => "public/swagger-ui",
   :index => 'index.html'
 
+use ActiveRecord::ConnectionAdapters::ConnectionManagement
+
 run WebStore::API
