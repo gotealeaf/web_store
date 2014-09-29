@@ -93,6 +93,16 @@ module WebStore
       )
     end
 
+    it "requires a price to create a product" do
+      post_json '/v1/products',
+        {name: 'Green Pen', sku: 'grep100'}, auth('admin', 'password')
+
+      assert_equal 422, response.status
+      assert_json_response(
+        {"status_code"=>422, "message"=>"Price must be an integer greater than 0"}
+      )
+    end
+
     it "updates an existing product" do
       product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
 

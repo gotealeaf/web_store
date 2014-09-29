@@ -2,6 +2,10 @@ module WebStore
   class Product < ActiveRecord::Base
     validates :name, :sku, presence: true
     validates :sku, format: /\w{3,}/, uniqueness: true
+    validates :price, numericality: {
+      only_integer: true, greater_than: 0,
+      message: "must be an integer greater than 0"
+    }
 
     def self.seed!
       create! name: "Red Pen", sku: "redp100", price: 100

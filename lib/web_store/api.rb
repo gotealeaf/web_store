@@ -11,13 +11,14 @@ module WebStore
       end
     end
 
+    rescue_from Grape::Exceptions::ValidationErrors do |e|
+      message = e.message.gsub(/\s*\[.*\Z/, '')
+      rack_response({ status_code: 422, message: message }.to_json, 422)
+    end
+
     rescue_from ActiveRecord::RecordNotFound do |e|
       message = e.message.gsub(/\s*\[.*\Z/, '')
-        Rack::Response.new(
-          [{ status_code: 404, message: message }.to_json],
-          404,
-          { 'Content-Type' => 'application/json' }
-        )
+      rack_response({ status_code: 404, message: message }.to_json, 404)
     end
 
     before do
@@ -53,7 +54,7 @@ module WebStore
         requires :name, type: String, desc: 'Name of the product'
         requires :sku, type: String, regexp: /[\w]{3,}/,
           desc: '3+ character unique identifier for product'
-        optional :price, type: Integer, desc: 'Price of the product in cents'
+        requires :price, type: Integer, desc: 'Price of the product in cents'
       end
       post '/products' do
         product = Product.new declared_params
@@ -71,7 +72,7 @@ module WebStore
         requires :name, type: String, desc: 'Name of the product'
         requires :sku, type: String, regexp: /[\w]{3,}/,
           desc: '3+ character unique identifier for product'
-        optional :price, type: Integer, desc: 'Price of the product in cents'
+        requires :price, type: Integer, desc: 'Price of the product in cents'
       end
       put '/products/:id' do
         product = Product.find(params[:id])
