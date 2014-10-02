@@ -13,7 +13,7 @@ module WebStore
 
     rescue_from Grape::Exceptions::ValidationErrors do |e|
       message = e.message.gsub(/\s*\[.*\Z/, '')
-      rack_response({ status_code: 422, message: message }.to_json, 422)
+      rack_response({ status_code: 422, message: message.capitalize }.to_json, 422)
     end
 
     rescue_from ActiveRecord::RecordNotFound do |e|
@@ -69,10 +69,10 @@ module WebStore
       desc "Update the attributes of an existing product."
       params do
         requires :id, type: Integer, desc: 'Product ID'
-        requires :name, type: String, desc: 'Name of the product'
-        requires :sku, type: String, regexp: /[\w]{3,}/,
+        optional :name, type: String, desc: 'Name of the product'
+        optional :sku, type: String, regexp: /[\w]{3,}/,
           desc: '3+ character unique identifier for product'
-        requires :price, type: Integer, desc: 'Price of the product in cents'
+        optional :price, type: Integer, desc: 'Price of the product in cents'
       end
       put '/products/:id' do
         product = Product.find(params[:id])

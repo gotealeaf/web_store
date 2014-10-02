@@ -99,7 +99,7 @@ module WebStore
 
       assert_equal 422, response.status
       assert_json_response(
-        {"status_code"=>422, "message"=>"Price must be an integer greater than 0"}
+        {"status_code"=>422, "message"=>"Price is missing"}
       )
     end
 
