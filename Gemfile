@@ -1,13 +1,14 @@
-# A sample Gemfile
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.3.3'
 
 gem 'dotenv', :groups => [:development, :test]
 
 gem 'rack'
 gem 'grape'
 gem 'activerecord', require: 'active_record'
+gem 'hashie-forbidden_attributes'
+
 gem 'pg'
 gem 'rake'
 gem 'racksh'
