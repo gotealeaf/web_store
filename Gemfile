@@ -8,6 +8,7 @@ gem 'rack'
 gem 'grape'
 gem 'activerecord', require: 'active_record'
 gem 'hashie-forbidden_attributes'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'pg'
 gem 'rake'
