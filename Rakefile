@@ -13,6 +13,12 @@ task :setup_db => :env do
   WebStore::Product.seed!
 end
 
+desc "Setup the datebase"
+task :reset_db => :env do
+  WebStore::Product.truncate_and_reset_table!
+  WebStore::Product.seed!
+end
+
 Rake::TestTask.new do |t|
   t.pattern = "test/*_test.rb"
   t.libs << 'test'
