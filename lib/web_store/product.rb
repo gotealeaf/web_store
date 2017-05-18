@@ -7,6 +7,10 @@ module WebStore
       message: "must be an integer greater than 0"
     }
 
+    def price_in_dollars
+      "$" + format("%.2f", price / 100.0)
+    end
+
     def self.seed!
       create! name: "Red Pen", sku: "redp100", price: 100
       create! name: "Blue Pen", sku: "blup100", price: 100

@@ -6,6 +6,9 @@ gem 'dotenv', :groups => [:development, :test]
 
 gem 'rack'
 gem 'grape'
+gem 'sinatra'
+gem 'erubi'
+
 gem 'activerecord', require: 'active_record'
 gem 'hashie-forbidden_attributes'
 gem 'rack-cors', :require => 'rack/cors'
@@ -18,6 +21,7 @@ gem 'grape-swagger'
 group :development do
   gem 'byebug'
   gem 'rerun'
+  gem 'shotgun'
 end
 
 group :test do

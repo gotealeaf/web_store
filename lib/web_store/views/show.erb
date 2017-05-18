@@ -1,0 +1,6 @@
+<h2 class="name"><%= @product.name %></h2>
+<p class="sku">SKU: <%= @product.sku %></p>
+<p class="price">Price: <%= @product.price_in_dollars %></p>
+
+<p><a href="/products/<%= @product.id %>/edit">Edit this product</a></p>
+<p><a href="/products">&laquo; Back to all products</a></p>

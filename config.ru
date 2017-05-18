@@ -8,11 +8,5 @@ use Rack::Cors do
   end
 end
 
-use Rack::Static,
-  :urls => ["swagger-ui"],
-  :root => "public/swagger-ui",
-  :index => 'index.html'
-
 use ActiveRecord::ConnectionAdapters::ConnectionManagement
-
-run WebStore::API
+run Rack::Cascade.new [WebStore::API, WebStore::Web]

@@ -3,6 +3,10 @@ require 'test_helper'
 module WebStore
   describe API do
 
+    def app
+      WebStore::API
+    end
+
     before do
       Product.destroy_all
     end

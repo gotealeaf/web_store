@@ -1,0 +1,7 @@
+  <% product.errors.each do |attr, error| %>
+    <p class="error"><%= attr.capitalize %> <%== error %>!</p>
+  <% end %>
+  <p><label>Name: <input type="text" name="name" value="<%= product.name %>"></label></p>
+  <p><label>SKU: <input type="text" name="sku" value="<%= product.sku %>"></label></p>
+  <p><label>Price: $<input type="text" name="price" value="<%= product.price %>"></label></p>
+  <button type="submit">Save</button>
