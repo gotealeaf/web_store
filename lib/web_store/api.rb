@@ -43,13 +43,23 @@ module WebStore
       Product.find params[:id]
     end
 
-
     group do
-      http_basic do |username, password|
-        { 'admin' => 'password' }[username] == password
+      auth_headers = {
+        headers: {
+          "Authentication" => {
+            description: "Auth token",
+            required: true
+          }
+        }
+      }
+
+      before do
+        unless request.headers["Authorization"] == "token AUTH_TOKEN"
+          error!({status_code: 401, message: "Must pass credentials in Authentication header."}, 401)
+        end
       end
 
-      desc "Create a new product."
+      desc "Create a new product.", auth_headers
       params do
         requires :name, type: String, desc: 'Name of the product'
         requires :sku, type: String, regexp: /[\w]{3,}/,
