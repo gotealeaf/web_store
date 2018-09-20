@@ -46,8 +46,8 @@ module WebStore
     group do
       auth_headers = {
         headers: {
-          "Authentication" => {
-            description: "Auth token",
+          "Authorization" => {
+            description: "token AUTH_TOKEN",
             required: true
           }
         }
