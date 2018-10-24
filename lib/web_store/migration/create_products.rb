@@ -1,5 +1,5 @@
 module WebStore::Migration
-  class CreateProducts < ActiveRecord::Migration
+  class CreateProducts < ActiveRecord::Migration[5.2]
 
     def change
       create_table :products, force: true do |t|
