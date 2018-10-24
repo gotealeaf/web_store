@@ -1,21 +1,19 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (4.1.6)
-      activesupport (= 4.1.6)
-      builder (~> 3.1)
-    activerecord (4.1.6)
-      activemodel (= 4.1.6)
-      activesupport (= 4.1.6)
-      arel (~> 5.0.0)
-    activesupport (4.1.6)
-      i18n (~> 0.6, >= 0.6.9)
-      json (~> 1.7, >= 1.7.7)
+    activemodel (5.2.1)
+      activesupport (= 5.2.1)
+    activerecord (5.2.1)
+      activemodel (= 5.2.1)
+      activesupport (= 5.2.1)
+      arel (>= 9.0)
+    activesupport (5.2.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    ansi (1.4.3)
-    arel (5.0.1.20140414130214)
+    ansi (1.5.0)
+    arel (9.0.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -31,7 +29,11 @@ GEM
       descendants_tracker (~> 0.0.1)
     columnize (0.8.9)
     concurrent-ruby (1.0.5)
+<<<<<<< HEAD
     database_cleaner (1.3.0)
+=======
+    database_cleaner (1.7.0)
+>>>>>>> e78b83ecdb898565f51a321f19d09a2eb80edc05
     debugger-linecache (1.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -47,6 +49,7 @@ GEM
       rack (>= 1.3.0)
       rack-accept
       virtus (>= 1.0.0)
+<<<<<<< HEAD
     grape-entity (0.4.4)
       activesupport
       multi_json (>= 1.3.2)
@@ -59,21 +62,41 @@ GEM
     ice_nine (0.11.2)
     json (1.8.6)
     kgio (2.11.2)
+=======
+    grape-swagger (0.31.1)
+      grape (>= 0.16.2)
+    hitimes (1.2.2)
+    i18n (1.1.1)
+      concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
+    kgio (2.9.2)
+>>>>>>> e78b83ecdb898565f51a321f19d09a2eb80edc05
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     minitest (5.11.3)
+<<<<<<< HEAD
     minitest-reporters (1.0.5)
+=======
+    minitest-reporters (1.3.5)
+>>>>>>> e78b83ecdb898565f51a321f19d09a2eb80edc05
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
+<<<<<<< HEAD
     multi_json (1.13.1)
     mustermann (1.0.3)
     mustermann-grape (1.0.0)
       mustermann (~> 1.0.0)
     pg (0.17.1)
+=======
+    mustermann (1.0.3)
+    mustermann-grape (1.0.0)
+      mustermann (~> 1.0.0)
+    pg (1.1.3)
+>>>>>>> e78b83ecdb898565f51a321f19d09a2eb80edc05
     rack (2.0.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -89,7 +112,7 @@ GEM
       ffi (>= 0.5.0)
     rerun (0.10.0)
       listen (~> 2.7, >= 2.7.3)
-    ruby-progressbar (1.6.0)
+    ruby-progressbar (1.10.0)
     slop (3.6.0)
     thread_safe (0.3.6)
     timers (4.0.1)
