@@ -1,7 +1,7 @@
 {
   "name": "Web Store",
   "description": "A small example server for learning about API interactions",
-  "stack": "heroku-22",
+  "stack": "heroku-18",
   "keywords": [
     "ruby",
     "api"
