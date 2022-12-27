@@ -1,0 +1,6 @@
+<% @products.each do |product| %>
+  <p>
+    <a href="/products/<%= product.id %>"><%= product.name %></a>
+    (<%= product.sku %>) - <%= product.price_in_dollars %>
+  </p>
+<% end %>

@@ -3,6 +3,10 @@ require 'test_helper'
 module WebStore
   describe API do
 
+    def app
+      WebStore::API
+    end
+
     before do
       Product.destroy_all
     end
@@ -52,8 +56,8 @@ module WebStore
     end
 
     it "requires json media type to create a new product" do
-      post '/v1/products',
-        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 415, response.status
       assert_json_response(
@@ -62,8 +66,8 @@ module WebStore
     end
 
     it "creates a new product" do
-      post_json '/v1/products',
-        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 201, response.status
       assert_json_response(
@@ -72,8 +76,8 @@ module WebStore
     end
 
     it "requires a name to create a product" do
-      post_json '/v1/products',
-        {name: '', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post_json '/v1/products', {name: '', sku: 'grep100', price: 100}
 
       assert_equal 422, response.status
       assert_json_response(
@@ -84,8 +88,8 @@ module WebStore
     it "requires a unique sku to create a product" do
       Product.create! name: 'Greenish Pen', sku: 'grep100', price: 100
 
-      post_json '/v1/products',
-        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 422, response.status
       assert_json_response(
@@ -94,8 +98,8 @@ module WebStore
     end
 
     it "requires a price to create a product" do
-      post_json '/v1/products',
-        {name: 'Green Pen', sku: 'grep100'}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post_json '/v1/products', {name: 'Green Pen', sku: 'grep100'}
 
       assert_equal 422, response.status
       assert_json_response(
@@ -106,8 +110,8 @@ module WebStore
     it "updates an existing product" do
       product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
 
-      put_json "/v1/products/#{product.id}",
-        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      put_json "/v1/products/#{product.id}", {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 200, response.status
       assert_json_response(
@@ -124,8 +128,8 @@ module WebStore
       Product.create! name: 'Greenish Pen', sku: 'grep100', price: 100
       product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
 
-      put_json "/v1/products/#{product.id}",
-        {name: 'Green Pen', sku: 'grep100', price: 100}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      put_json "/v1/products/#{product.id}", {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 422, response.status
       assert_json_response(
@@ -136,8 +140,7 @@ module WebStore
     it "requires authentication to update a product" do
       product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
 
-      put_json "/v1/products/#{product.id}",
-        {name: 'Green Pen', sku: 'grep100', price: 100}
+      put_json "/v1/products/#{product.id}", {name: 'Green Pen', sku: 'grep100', price: 100}
 
       assert_equal 401, response.status
       assert_equal 1, Product.count
@@ -148,7 +151,8 @@ module WebStore
     it "deletes a existing product" do
       product = Product.create! name: "Magic Pen", sku: "magp100", price: 500
 
-      delete "/v1/products/#{product.id}", {}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      delete "/v1/products/#{product.id}"
 
       assert_equal 204, response.status
       assert_equal "", response.body
@@ -178,7 +182,8 @@ module WebStore
     it "deletes all products and seeds with default data" do
       Product.create! name: "Magic Pen", sku: "magp100", price: 50000
 
-      post '/v1/reset', {}, auth('admin', 'password')
+      header "Authorization", "token AUTH_TOKEN"
+      post '/v1/reset'
 
       assert_equal 200, response.status
       assert_json_response(

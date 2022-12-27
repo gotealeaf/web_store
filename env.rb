@@ -1,12 +1,16 @@
-begin
+ENV["RACK_ENV"] ||= "development"
+
+case ENV["RACK_ENV"]
+when "development"
   require 'dotenv'
-  Dotenv.load
-rescue LoadError
-  # Don't load dotenv in production
+  Dotenv.load ".env"
+when "test"
+  require 'dotenv'
+  Dotenv.load ".env.test"
 end
 
 $:.unshift File.expand_path('lib', File.dirname(__FILE__))
-env = (ENV['RACK_ENV'] || :development)
+env = ENV['RACK_ENV']
 
 require 'bundler'
 Bundler.require :default, env.to_sym
