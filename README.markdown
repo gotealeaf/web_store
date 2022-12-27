@@ -4,7 +4,7 @@ This is a small web app written in Ruby using the [Grape](http://intridea.github
 
 Use the button below to spin up your own server!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/gotealeaf/230_web_store)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/gotealeaf/web_store)
 
 # Endpoints of Interest
 
