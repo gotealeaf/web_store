@@ -2,6 +2,7 @@
   "name": "Web Store",
   "description": "A small example server for learning about API interactions",
   "stack": "heroku-22",
+  "repository": "https://github.com/gotealeaf/web_store",
   "keywords": [
     "ruby",
     "api"
