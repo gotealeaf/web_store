@@ -1,7 +1,7 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
-ruby '3.1.2'
+ruby '3.0.3'
 
 gem 'dotenv', :groups => [:development, :test]
 
