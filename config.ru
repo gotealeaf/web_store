@@ -27,4 +27,12 @@ use Rack::Static,
   :root => "public/swagger-ui",
   :index => 'index.html'
 
-run WebStore::API
+  require 'rack/cors'
+  use Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', headers: :any, methods: [:get, :post, :patch, :put, :options]
+    end
+  end
+  
+  run Rack::Cascade.new [WebStore::API, WebStore::Web]
