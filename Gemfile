@@ -4,7 +4,7 @@ ruby '3.1.2'
 
 gem 'dotenv', '0.11.1', :groups => [:development, :test]
 
-gem 'rack', '1.6.13'
+gem 'rack', '2.1.4.2'
 gem 'grape', '1.1.0'
 gem 'sinatra'
 gem 'erubi'
