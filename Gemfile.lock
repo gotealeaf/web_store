@@ -69,7 +69,7 @@ GEM
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
     pg (1.4.5)
-    rack (2.2.5)
+    rack (2.2.6.2)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (1.1.1)
