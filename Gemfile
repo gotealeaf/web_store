@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 ruby '3.1.2'
 
-gem 'dotenv', :groups => [:development, :test]
+gem 'dotenv', '0.11.1', :groups => [:development, :test]
 
-gem 'rack'
-gem 'grape'
+gem 'rack', '2.0.5'
+gem 'grape', '1.1.0'
 gem 'sinatra'
 gem 'erubi'
 
@@ -14,9 +14,9 @@ gem 'hashie-forbidden_attributes'
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'pg'
-gem 'rake'
-gem 'racksh'
-gem 'grape-swagger'
+gem 'rake', '10.3.2'
+gem 'racksh', '1.0.0'
+gem 'grape-swagger', '0.31.1'
 
 group :development do
   gem 'byebug'
@@ -32,5 +32,5 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn'
+  gem 'unicorn', '4.8.3'
 end
