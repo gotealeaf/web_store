@@ -9,7 +9,7 @@ gem 'grape'
 gem 'sinatra'
 gem 'erubi'
 
-gem 'activerecord', require: 'active_record'
+gem 'activerecord', '5.2', require: 'active_record'
 gem 'hashie-forbidden_attributes'
 gem 'rack-cors', :require => 'rack/cors'
 
