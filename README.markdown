@@ -1,3 +1,5 @@
+# THIS REPO IS LIKELY OBSOLETE. See /230_web_store instead.
+
 # 230 Web Store
 
 This is a small web app written in Ruby using the [Grape](http://intridea.github.io/grape/) framework. Documentation is provided by [Swagger](http://swagger.io/) and can be viewed on the [live instance](https://ls-230-web-store-demo.herokuapp.com/v1/products) or, preferably, on your own instance.
