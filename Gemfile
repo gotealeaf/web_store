@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.1.2'
+ruby '3.2.2'
 
 gem 'dotenv', '0.11.1', :groups => [:development, :test]
 
