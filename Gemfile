@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.1.3'
 
 gem 'dotenv', '0.11.1', :groups => [:development, :test]
 
 gem 'rack', '1.6.13'
-gem 'grape', '1.1.0'
+gem 'grape'
 gem 'sinatra'
 gem 'erubi'
 
-gem 'activerecord', '5.2', require: 'active_record'
+gem 'activerecord', require: 'active_record'
 gem 'hashie-forbidden_attributes'
 gem 'rack-cors', :require => 'rack/cors'
 

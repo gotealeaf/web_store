@@ -15,7 +15,6 @@ env = ENV['RACK_ENV']
 require 'bundler'
 Bundler.require :default, env.to_sym
 
-ActiveRecord::Base.default_timezone = :utc
 ActiveRecord::Base.establish_connection ENV['DATABASE_URL']
 
 require 'web_store'
