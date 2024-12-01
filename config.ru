@@ -17,7 +17,6 @@ class ConnectionManagement
   end
 end
 
-# Create a router that bypasses static for API calls
 class Router
   def initialize(api_app, web_app)
     @api = api_app
@@ -46,5 +45,4 @@ use Rack::Cors do
   end
 end
 
-# Use our router instead of Cascade
 run Router.new(WebStore::API, WebStore::Web)
